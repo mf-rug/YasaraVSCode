@@ -5,12 +5,12 @@ Execute Yasara commands from VSCode
 ## installation
 ```
 # create the file to which current selection is written
-touch "$HOME/.vscode/save_hl.txt"
+touch "$HOME/.vscode/save_hl.py"
 
 # shell script that writes the file
 echo \
 '#!/bin/bash
-pbpaste > ~/.vscode/save_hl.txt' \
+pbpaste > ~/.vscode/save_hl.py' \
 > "$HOME/.vscode/append_from_clipboard.sh"
 
 # make shell script executable
@@ -63,7 +63,7 @@ from yasara import *
 import os
 import time
 
-file_to_watch = os.path.expanduser("~/.vscode/save_hl.txt")
+file_to_watch = os.path.expanduser("~/.vscode/save_hl.py")
 last_mtime = 0
 
 while True:
