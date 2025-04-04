@@ -4,10 +4,7 @@ Execute Yasara commands from VSCode
 
 ## installation
 ```
-# create the file to which current selection is written
-touch "$HOME/.vscode/save_hl.py"
-
-# shell script that writes the file
+# create a shell script with commands to write to a helper file
 echo \
 '#!/bin/bash
 pbpaste > ~/.vscode/save_hl.py' \
@@ -16,8 +13,8 @@ pbpaste > ~/.vscode/save_hl.py' \
 # make shell script executable
 chmod +x append_from_clipboard.sh
 
-# install multi-command.
-# if `code` isn't available, install manually within VSCode
+# install multi-command for VSCode
+# should `code` not be available for you, install manually within VSCode
 code --install-extension ryuta46.multi-command
 
 # add a keyboard shortcut to VSCode, adjust / perform manually if desired
@@ -43,7 +40,7 @@ echo \
 ]
 ' >> "$HOME/Library/Application Support/Code/User/keybindings.json"
 
-#Then create a yasara plugin
+# Finally, create a=the yasara plugin. Adjust yasara installation path, if necessary
 cat <<EOF > /Applications/YASARA.app/Contents/yasara/plg/
 # YASARA PLUGIN
 # TOPIC:       Python
