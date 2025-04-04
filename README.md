@@ -63,10 +63,41 @@ from yasara import *
 import os
 import time
 
-file_to_watch = os.path.expanduser("~/.vscode/save_hl.py")
-last_mtime = 0
+# get paths
+home = os.environ["HOME"]
+file_to_watch = os.path.join(home, ".vscode/save_hl.py")
+closeplg = os.path.join(home, '.vscode/closeplg')
 
-while True:
+# delete existing helper files
+if (os.path.exists(file_to_watch)):
+    os.remove(file_to_watch)
+if (os.path.exists(closeplg)):
+    os.remove(file_to_watch)
+
+with open(closeplg, 'a'):
+    os.utime(closeplg, None)
+
+with open(file_to_watch, 'a'):
+    os.utime(file_to_watch, None)
+
+# Make Button to quit plugin
+Console('OFF')
+img = MakeImage("Buttons",topcol="None",bottomcol="None")
+ShowImage(img,alpha=85,priority=1)
+PrintImage(img) 
+Font("Arial",height=7,color="black")
+ShowButton("PyVSC",x='80%', y='0.5%',color="White", height=29, action=f'DelFile {closeplg}')
+
+# Show info
+ShowMessage('PythonVSCode plugin launched. To quit, press button above HUD.')
+Wait(500)
+HideMessage()
+PrintCon()
+Console('ON')
+
+# run main loop
+last_mtime = 0
+while os.path.exists(closeplg):
     try:
         mtime = os.path.getmtime(file_to_watch)
         if mtime != last_mtime:
@@ -75,9 +106,15 @@ while True:
                 code = f.read()
                 exec(code, globals())
     except Exception as e:
-        print("Auto-exec error:", e)
-    
+        print("Auto-exec error:", e)   
     time.sleep(1)
+
+# Hide button
+Console('OFF')
+PrintImage(img) 
+FillRect()
+PrintCon()
+Console('ON')
 
 # End plugin
 plugin.end()
