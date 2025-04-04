@@ -41,7 +41,7 @@ echo \
 ' >> "$HOME/Library/Application Support/Code/User/keybindings.json"
 
 # Finally, create a=the yasara plugin. Adjust yasara installation path, if necessary
-cat <<EOF > /Applications/YASARA.app/Contents/yasara/plg/
+cat <<EOF > /Applications/YASARA.app/Contents/yasara/plg/PythonVSCode.py
 # YASARA PLUGIN
 # TOPIC:       Python
 # TITLE:       PythonVSCode
